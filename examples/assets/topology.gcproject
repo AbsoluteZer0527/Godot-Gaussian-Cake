@@ -1,0 +1,100 @@
+{
+  "assets": [
+    {
+      "id": "a",
+      "path": "round.obj"
+    },
+    {
+      "id": "b",
+      "path": "tall.obj"
+    }
+  ],
+  "bake": {
+    "cotan": true,
+    "fallback_color": [
+      0.8485281467437744,
+      0.8485281467437744,
+      0.8602325320243835
+    ],
+    "fit_stiffness": 1.0,
+    "method": 0,
+    "mixture_k": 8,
+    "posterior_temperature": 1.0,
+    "samples": 5000,
+    "sdf_resolution": 64,
+    "seed": 42,
+    "sinkhorn_epsilon": 0.05000000074505806,
+    "sphere_match": true
+  },
+  "export": {
+    "fps": 30,
+    "normal_tolerance": 0.009999999776482582,
+    "position_tolerance": 0.0010000000474974513,
+    "rigid": false,
+    "scale": 1.0,
+    "settle_seconds": 5.0
+  },
+  "format": "GaussianCakeProject",
+  "keys": [
+    "a",
+    "b"
+  ],
+  "loop": false,
+  "mode": "topology",
+  "normalization": "independent-aabb",
+  "origin": {
+    "enabled": false,
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "segments": [
+    {
+      "base_preset": 0,
+      "duration": 1.0,
+      "easing_linked": true,
+      "paint": [],
+      "pins": [],
+      "preset": 0,
+      "style": {
+        "cohesion": 0.6000000238418579,
+        "early": [
+          0.44999998807907104,
+          0.0,
+          0.550000011920929,
+          1.0
+        ],
+        "jiggle": 0.0,
+        "late": [
+          0.44999998807907104,
+          0.0,
+          0.550000011920929,
+          1.0
+        ],
+        "mid_grow": 0.30000001192092896,
+        "name": "Classic",
+        "origin": 0,
+        "sag": 0.0,
+        "wave": 0.0
+      }
+    }
+  ],
+  "selected": 0,
+  "splats": {
+    "area_preserve": true,
+    "color_match": 0.0,
+    "count": 4096,
+    "crop_radius": 1.5,
+    "export_dc_only": false,
+    "mixture_k": 4,
+    "posterior_temperature": 1.0,
+    "samples": 1000,
+    "sh_degree": 3,
+    "sinkhorn_epsilon": 0.05000000074505806,
+    "size": 1.0,
+    "up": 1
+  },
+  "version": 2
+}
