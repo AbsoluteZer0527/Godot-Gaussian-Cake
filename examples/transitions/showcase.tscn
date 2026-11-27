@@ -1,0 +1,321 @@
+[gd_scene format=3 uid="uid://d2efeb6nejeiw"]
+
+[ext_resource type="Script" uid="uid://cgxcxhtwhcoat" path="res://examples/transitions/showcase.gd" id="1"]
+[ext_resource type="Script" uid="uid://osggsupw7k3x" path="res://addons/gaussian_cake/runtime/form_player_3d.gd" id="2"]
+
+[sub_resource type="StyleBoxFlat" id="Hover"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.15, 0.26, 0.3, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Button"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1, 0.16, 0.21, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+bg_color = Color(0.058, 0.082, 0.115, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15, 0.22, 0.28, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="Theme" id="GalleryTheme"]
+default_font_size = 15
+Button/styles/hover = SubResource("Hover")
+Button/styles/normal = SubResource("Button")
+Button/styles/pressed = SubResource("Hover")
+HBoxContainer/constants/separation = 12
+Label/colors/font_color = Color(0.83, 0.9, 0.94, 1)
+OptionButton/styles/hover = SubResource("Hover")
+OptionButton/styles/normal = SubResource("Button")
+OptionButton/styles/pressed = SubResource("Hover")
+PanelContainer/styles/panel = SubResource("Panel")
+VBoxContainer/constants/separation = 9
+
+[sub_resource type="Environment" id="Env"]
+background_mode = 1
+background_color = Color(0.035, 0.055, 0.08, 1)
+ambient_light_source = 3
+
+[node name="ComplexTransitions" type="Control" unique_id=2080180106]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("GalleryTheme")
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1894065468]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.035, 0.055, 0.08, 1)
+
+[node name="WorldFrame" type="SubViewportContainer" parent="." unique_id=1973837230]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 76.0
+offset_right = -24.0
+offset_bottom = -224.0
+mouse_default_cursor_shape = 6
+stretch = true
+stretch_shrink = 2
+
+[node name="World" type="SubViewport" parent="WorldFrame" unique_id=1867923463]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(526, 210)
+render_target_update_mode = 4
+
+[node name="Stage" type="Node3D" parent="WorldFrame/World" unique_id=1746844148]
+
+[node name="Environment" type="WorldEnvironment" parent="WorldFrame/World/Stage" unique_id=10326279]
+environment = SubResource("Env")
+
+[node name="Camera" type="Camera3D" parent="WorldFrame/World/Stage" unique_id=1006027342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 1, 2.7)
+current = true
+fov = 45.0
+near = 0.03
+far = 30.0
+
+[node name="Forms" type="Node3D" parent="WorldFrame/World/Stage" unique_id=618442181]
+script = ExtResource("2")
+library_path = "res://examples/transitions/assets/library.json"
+renderer_mode = "splats"
+duration = 4.0
+transport_mode = "refined"
+paused = true
+
+[node name="Header" type="VBoxContainer" parent="." unique_id=1086596451]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 22.0
+offset_right = 780.0
+offset_bottom = 76.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Header" unique_id=158632181]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Scenes in transit"
+
+[node name="Subtitle" type="Label" parent="Header" unique_id=1228617070]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.64, 0.71, 1)
+text = "Cactus capture / Lighthouse island / Coral reef"
+
+[node name="Counters" type="VBoxContainer" parent="." unique_id=172461737]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -335.0
+offset_top = 26.0
+offset_right = -32.0
+offset_bottom = 75.0
+mouse_filter = 2
+
+[node name="Count" type="Label" parent="Counters" unique_id=1730390654]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.44, 0.85, 0.71, 1)
+text = "LOADING ENDPOINTS"
+horizontal_alignment = 2
+
+[node name="Performance" type="Label" parent="Counters" unique_id=1280835243]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+
+[node name="Look" type="Label" parent="." unique_id=7453856]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = -255.0
+offset_bottom = -235.0
+theme_override_colors/font_color = Color(0.48, 0.64, 0.71, 1)
+theme_override_font_sizes/font_size = 12
+text = "PIXEL / SOURCE PALETTE"
+
+[node name="Hint" type="Label" parent="." unique_id=92369802]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -550.0
+offset_top = -255.0
+offset_right = -34.0
+offset_bottom = -235.0
+theme_override_colors/font_color = Color(0.48, 0.64, 0.71, 1)
+theme_override_font_sizes/font_size = 12
+text = "Drag orbit / Wheel zoom / Space pause / B mapping / P pixels"
+horizontal_alignment = 2
+
+[node name="Controls" type="PanelContainer" parent="." unique_id=1082713102]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -226.0
+offset_right = -24.0
+offset_bottom = -20.0
+
+[node name="Rows" type="VBoxContainer" parent="Controls" unique_id=1905027701]
+layout_mode = 2
+
+[node name="Pair" type="HBoxContainer" parent="Controls/Rows" unique_id=263308756]
+layout_mode = 2
+
+[node name="Source" type="OptionButton" parent="Controls/Rows/Pair" unique_id=156142914]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+focus_mode = 0
+
+[node name="Destination" type="OptionButton" parent="Controls/Rows/Pair" unique_id=1197903551]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+focus_mode = 0
+
+[node name="Begin" type="Button" parent="Controls/Rows/Pair" unique_id=1190677097]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Morph / restart"
+
+[node name="Pause" type="Button" parent="Controls/Rows/Pair" unique_id=641123897]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+focus_mode = 0
+text = "Play"
+
+[node name="Auto" type="CheckButton" parent="Controls/Rows/Pair" unique_id=1331657748]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Auto cycle"
+
+[node name="Options" type="HBoxContainer" parent="Controls/Rows" unique_id=1227176300]
+layout_mode = 2
+
+[node name="Mapping" type="OptionButton" parent="Controls/Rows/Options" unique_id=867431693]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(228, 0)
+layout_mode = 2
+focus_mode = 0
+
+[node name="Pixel" type="CheckButton" parent="Controls/Rows/Options" unique_id=955944065]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+button_pressed = true
+text = "Pixel palette"
+
+[node name="DurationLabel" type="Label" parent="Controls/Rows/Options" unique_id=1031167228]
+layout_mode = 2
+text = "Duration"
+
+[node name="Duration" type="HSlider" parent="Controls/Rows/Options" unique_id=1602792093]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+min_value = 1.0
+max_value = 8.0
+step = 0.5
+value = 4.0
+
+[node name="DurationText" type="Label" parent="Controls/Rows/Options" unique_id=606732006]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+text = "4.0 s"
+
+[node name="Timeline" type="HBoxContainer" parent="Controls/Rows" unique_id=1895095271]
+layout_mode = 2
+
+[node name="Progress" type="HSlider" parent="Controls/Rows/Timeline" unique_id=1582385629]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="ProgressText" type="Label" parent="Controls/Rows/Timeline" unique_id=1164478288]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "100%"
+
+[node name="Details" type="HBoxContainer" parent="Controls/Rows" unique_id=242990057]
+layout_mode = 2
+
+[node name="Description" type="VBoxContainer" parent="Controls/Rows/Details" unique_id=276059944]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Status" type="Label" parent="Controls/Rows/Details/Description" unique_id=1429429519]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.44, 0.85, 0.71, 1)
+text = "Loading complex scenes..."
+
+[node name="MappingLabel" type="Label" parent="Controls/Rows/Details/Description" unique_id=150547812]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.64, 0.71, 1)
+theme_override_font_sizes/font_size = 11
+text = "PAIR REFINEMENT"
+
+[node name="Metrics" type="Label" parent="Controls/Rows/Details" unique_id=2136490329]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 2

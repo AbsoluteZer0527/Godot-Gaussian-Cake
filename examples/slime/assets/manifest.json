@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "duration": 0.75,
+  "splats_per_model": 48000,
+  "forms": {
+    "slime": {
+      "static_scene": "res://examples/slime/assets/models/slime.glb",
+      "static_splat": "res://examples/slime/assets/rest/slime.gcsplat",
+      "center": [
+        0.009064160645773978,
+        0.9521194621899086,
+        0.005505286548629695
+      ],
+      "scale": 1.0305825398569697,
+      "triangles": 1792
+    },
+    "mushroom": {
+      "static_scene": "res://examples/slime/assets/models/mushroom.glb",
+      "static_splat": "res://examples/slime/assets/rest/mushroom.gcsplat",
+      "center": [
+        -4.398871878341648e-05,
+        0.8202896365233898,
+        -0.0013863154572000824
+      ],
+      "scale": 1.1161414754271783,
+      "triangles": 1792
+    },
+    "stone": {
+      "static_scene": "res://examples/slime/assets/models/stone.glb",
+      "static_splat": "res://examples/slime/assets/rest/stone.gcsplat",
+      "center": [
+        -0.011005036611429486,
+        0.6325000000000002,
+        0.021009401213869627
+      ],
+      "scale": 1.0961853424272099,
+      "triangles": 1792
+    },
+    "apple": {
+      "static_scene": "res://examples/slime/assets/models/apple.glb",
+      "static_splat": "res://examples/slime/assets/rest/apple.gcsplat",
+      "center": [
+        0.04623135700017872,
+        0.9591744882076978,
+        0.023364479495653734
+      ],
+      "scale": 0.9341744882076979,
+      "triangles": 2184
+    },
+    "crate": {
+      "static_scene": "res://examples/slime/assets/models/crate.glb",
+      "static_splat": "res://examples/slime/assets/rest/crate.gcsplat",
+      "center": [
+        0.0,
+        0.8499451887712881,
+        0.03624243517665754
+      ],
+      "scale": 0.8541500000000002,
+      "triangles": 2032
+    }
+  },
+  "transitions": {
+    "mushroom": {
+      "glb": "res://examples/slime/assets/morphs/slime_to_mushroom.glb",
+      "splat": "res://examples/slime/assets/morphs/slime_to_mushroom.gcsplat",
+      "color_texture": "res://examples/slime/assets/colors/mushroom.png",
+      "duration": 0.75,
+      "vertices": 5376
+    },
+    "stone": {
+      "glb": "res://examples/slime/assets/morphs/slime_to_stone.glb",
+      "splat": "res://examples/slime/assets/morphs/slime_to_stone.gcsplat",
+      "color_texture": "res://examples/slime/assets/colors/stone.png",
+      "duration": 0.75,
+      "vertices": 5376
+    },
+    "apple": {
+      "glb": "res://examples/slime/assets/morphs/slime_to_apple.glb",
+      "splat": "res://examples/slime/assets/morphs/slime_to_apple.gcsplat",
+      "color_texture": "res://examples/slime/assets/colors/apple.png",
+      "duration": 0.75,
+      "vertices": 6552
+    },
+    "crate": {
+      "glb": "res://examples/slime/assets/morphs/slime_to_crate.glb",
+      "splat": "res://examples/slime/assets/morphs/slime_to_crate.gcsplat",
+      "color_texture": "res://examples/slime/assets/colors/crate.png",
+      "duration": 0.75,
+      "vertices": 6096
+    }
+  }
+}

@@ -26,9 +26,18 @@ var _loaded_frame := -1
 var _order: Array[int] = []
 var _depths := PackedFloat32Array()
 var _instance_buffer := PackedFloat32Array()
+var _sort_keys := PackedInt64Array()
+var _order_pixels := PackedFloat32Array()
+var _order_texture: ImageTexture
+var _positions_a := PackedVector3Array()
+var _positions_b := PackedVector3Array()
+var _last_depth_direction := Vector3(INF, INF, INF)
 var _last_transform := Transform3D()
 var _last_time := -1.0
 var _last_near := -1.0
+## Diagnostics measure CPU work, not GPU frame time.
+var last_sort_usec := 0
+var sort_count := 0
 
 func _enter_tree() -> void:
 	super._enter_tree()
@@ -51,6 +60,13 @@ func _rebuild() -> void:
 	_material = null
 	_frame_a = null
 	_frame_b = null
+	_order_texture = null
+	_positions_a = PackedVector3Array()
+	_positions_b = PackedVector3Array()
+	_last_depth_direction = Vector3(INF, INF, INF)
+	_last_near = -1.0
+	last_sort_usec = 0
+	sort_count = 0
 	_loaded_frame = -1
 	_last_time = -1.0
 	_order.clear()
@@ -84,13 +100,29 @@ func _rebuild() -> void:
 	_renderer.multimesh = instances
 	_order.resize(_cache.count)
 	_depths.resize(_cache.count)
+	_sort_keys.resize(_cache.count)
+	_order_pixels.resize(256 * ceili(float(_cache.count) / 256.0))
 	_instance_buffer.resize(_cache.count * 16)
 	for i in range(_cache.count):
 		_order[i] = i
 		_instance_buffer[i*16] = 1.0
 		_instance_buffer[i*16+5] = 1.0
 		_instance_buffer[i*16+10] = 1.0
+		# Instance IDs stay fixed. Only the small slot->splat lookup changes when sorted.
+		_instance_buffer[i*16+12] = float(i % 256)
+		_instance_buffer[i*16+13] = float(i / 256)
+	instances.buffer = _instance_buffer
 	_initialize_playback(_cache.duration)
+
+func _frame_positions(frame: int) -> PackedVector3Array:
+	var start: int = _cache.payload + frame * _cache.count * 56
+	var values: PackedFloat32Array = _cache.data.slice(start, start + _cache.count * 56).to_float32_array()
+	var result := PackedVector3Array()
+	result.resize(_cache.count)
+	for i in range(_cache.count):
+		var offset := i * 14
+		result[i] = Vector3(values[offset], values[offset+1], values[offset+2])
+	return result
 
 func _render_frame() -> void:
 	if _cache == null or not is_instance_valid(_renderer) or not error.is_empty():
@@ -107,32 +139,71 @@ func _render_frame() -> void:
 		return
 	_renderer.visible = true
 	var model_view := view_camera.global_transform.affine_inverse() * global_transform
-	if _last_time == time and _last_transform == model_view and _last_near == view_camera.near:
-		return
-	_last_time = time
+	# All points receive the same depth offset under pure translation. Neither
+	# translation, camera FOV nor camera roll around its viewing axis changes order.
+	var depth_direction := Vector3(model_view.basis.x.z, model_view.basis.y.z, model_view.basis.z.z)
 	_last_transform = model_view
-	_last_near = view_camera.near
+	if _last_near != view_camera.near:
+		_last_near = view_camera.near
+		_material.set_shader_parameter("camera_near", view_camera.near)
+	if _last_time == time and _last_depth_direction == depth_direction:
+		last_sort_usec = 0
+		return
+	var sort_start := Time.get_ticks_usec()
+	_last_time = time
+	_last_depth_direction = depth_direction
 	var a: int = _cache.interval(time)
 	if _loaded_frame != a:
 		if _frame_a == null:
 			_frame_a = ImageTexture.create_from_image(_cache.frame_image(a))
 			_frame_b = ImageTexture.create_from_image(_cache.frame_image(a+1))
+			_positions_a = _frame_positions(a)
+			_positions_b = _frame_positions(a+1)
+		elif a == _loaded_frame + 1:
+			var previous_a := _frame_a
+			_frame_a = _frame_b
+			_frame_b = previous_a
+			_frame_b.update(_cache.frame_image(a+1))
+			_positions_a = _positions_b
+			_positions_b = _frame_positions(a+1)
+		elif a == _loaded_frame - 1:
+			var previous_b := _frame_b
+			_frame_b = _frame_a
+			_frame_a = previous_b
+			_frame_a.update(_cache.frame_image(a))
+			_positions_b = _positions_a
+			_positions_a = _frame_positions(a)
 		else:
 			_frame_a.update(_cache.frame_image(a))
 			_frame_b.update(_cache.frame_image(a+1))
+			_positions_a = _frame_positions(a)
+			_positions_b = _frame_positions(a+1)
 		_material.set_shader_parameter("frame_a", _frame_a)
 		_material.set_shader_parameter("frame_b", _frame_b)
 		_loaded_frame = a
 	var blend: float = clampf((time-_cache.times[a]) / (_cache.times[a+1]-_cache.times[a]), 0.0, 1.0)
 	_material.set_shader_parameter("frame_blend", blend)
-	_material.set_shader_parameter("camera_near", view_camera.near)
 	for i in range(_cache.count):
-		var position: Vector3 = _cache.position_at(a, i).lerp(_cache.position_at(a+1, i), blend)
-		_depths[i] = (model_view * position).z
-	_order.sort_custom(func(left: int, right: int) -> bool:
-		return _depths[left] < _depths[right] if _depths[left] != _depths[right] else left < right)
+		_depths[i] = depth_direction.dot(_positions_a[i].lerp(_positions_b[i], blend))
+	# Native integer sort avoids hundreds of thousands of interpreted comparator
+	# calls. Monotonic IEEE float32 bits preserve the previous float32 depth order;
+	# the low 16 bits provide the same deterministic ID tie break (max 50,000).
+	var depth_bytes := _depths.to_byte_array()
+	for i in range(_cache.count):
+		var bits := depth_bytes.decode_u32(i * 4)
+		if bits == 0x80000000: bits = 0 # -0 and +0 are equal depths.
+		var ordered := (~bits & 0xffffffff) if (bits & 0x80000000) else (bits ^ 0x80000000)
+		_sort_keys[i] = (ordered << 16) | i
+	_sort_keys.sort()
 	for slot in range(_cache.count):
-		# Exact in Compatibility's half-float custom data, even above ID 2048.
-		_instance_buffer[slot*16+12] = float(_order[slot] % 256)
-		_instance_buffer[slot*16+13] = float(_order[slot] / 256)
-	_renderer.multimesh.buffer = _instance_buffer
+		var id := int(_sort_keys[slot] & 0xffff)
+		_order[slot] = id
+		_order_pixels[slot] = float(id)
+	var order_image := Image.create_from_data(256, _order_pixels.size() / 256, false, Image.FORMAT_RF, _order_pixels.to_byte_array())
+	if _order_texture == null:
+		_order_texture = ImageTexture.create_from_image(order_image)
+		_material.set_shader_parameter("splat_order", _order_texture)
+	else:
+		_order_texture.update(order_image)
+	last_sort_usec = Time.get_ticks_usec() - sort_start
+	sort_count += 1

@@ -1,0 +1,16 @@
+[remap]
+
+importer="gaussian_cake.splat_v1"
+importer_version=1
+type="Resource"
+uid="uid://bryouyvfxjmrd"
+path="res://.godot/imported/crate.gcsplat-d6773956fed457e0f8ef8cbd59c0d94e.res"
+
+[deps]
+
+source_file="res://examples/slime/assets/rest/crate.gcsplat"
+dest_files=["res://.godot/imported/crate.gcsplat-d6773956fed457e0f8ef8cbd59c0d94e.res"]
+
+[params]
+
+limits/max_splats=50000

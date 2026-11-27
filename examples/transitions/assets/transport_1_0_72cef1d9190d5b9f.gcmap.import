@@ -1,0 +1,15 @@
+[remap]
+
+importer="gaussian_cake.transport_map_v1"
+importer_version=1
+type="Resource"
+uid="uid://dh0f76ywj5rfj"
+path="res://.godot/imported/transport_1_0_72cef1d9190d5b9f.gcmap-7214e79f9e8b99ae663831ca94971007.res"
+
+[deps]
+
+source_file="res://examples/transitions/assets/transport_1_0_72cef1d9190d5b9f.gcmap"
+dest_files=["res://.godot/imported/transport_1_0_72cef1d9190d5b9f.gcmap-7214e79f9e8b99ae663831ca94971007.res"]
+
+[params]
+

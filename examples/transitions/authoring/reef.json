@@ -1,0 +1,943 @@
+{
+  "format": "GaussianCakeProceduralSource",
+  "version": 1,
+  "name": "reef",
+  "count": 344405,
+  "planned": 344405,
+  "size": 1.8,
+  "pose_time": 0,
+  "coordinate_system": "right-handed Y-up",
+  "bounds": {
+    "min": [
+      -13.730229377746582,
+      -1.5432188510894775,
+      -9.399188041687012
+    ],
+    "max": [
+      9.399564743041992,
+      9.276182174682617,
+      9.400742530822754
+    ]
+  },
+  "camera": {
+    "pos": [
+      3.2,
+      3.3,
+      13
+    ],
+    "target": [
+      0,
+      1.7,
+      -0.6
+    ]
+  },
+  "palette": [
+    [
+      0.023529411764705882,
+      0.19607843137254902,
+      0.24705882352941178
+    ],
+    [
+      0.10588235294117647,
+      0.5607843137254902,
+      0.6274509803921569
+    ],
+    [
+      0.16470588235294117,
+      0.6588235294117647,
+      0.7058823529411765
+    ],
+    [
+      0.23529411764705882,
+      0.7686274509803922,
+      0.7686274509803922
+    ],
+    [
+      0.6235294117647059,
+      0.9411764705882353,
+      0.8862745098039215
+    ],
+    [
+      0.23137254901960785,
+      0.29411764705882354,
+      0.3607843137254902
+    ],
+    [
+      0.5607843137254902,
+      0.5411764705882353,
+      0.4627450980392157
+    ],
+    [
+      0.7215686274509804,
+      0.6627450980392157,
+      0.5098039215686274
+    ],
+    [
+      0.8392156862745098,
+      0.7568627450980392,
+      0.5568627450980392
+    ],
+    [
+      0.9176470588235294,
+      0.8549019607843137,
+      0.6431372549019608
+    ],
+    [
+      0.9647058823529412,
+      0.9098039215686274,
+      0.7215686274509804
+    ],
+    [
+      0.43137254901960786,
+      0.10980392156862745,
+      0.30980392156862746
+    ],
+    [
+      0.5764705882352941,
+      0.2196078431372549,
+      0.37254901960784315
+    ],
+    [
+      0.8392156862745098,
+      0.5607843137254902,
+      0.6431372549019608
+    ],
+    [
+      1,
+      0.7058823529411765,
+      0.7529411764705882
+    ],
+    [
+      1,
+      0.5411764705882353,
+      0.16470588235294117
+    ],
+    [
+      1,
+      0.7843137254901961,
+      0.2980392156862745
+    ],
+    [
+      1,
+      0.9411764705882353,
+      0.41568627450980394
+    ],
+    [
+      0.20784313725490197,
+      0.1568627450980392,
+      0.4196078431372549
+    ],
+    [
+      0.4823529411764706,
+      0.3215686274509804,
+      0.7843137254901961
+    ],
+    [
+      0.611764705882353,
+      0.5254901960784314,
+      0.7686274509803922
+    ],
+    [
+      0.7215686274509804,
+      0.5647058823529412,
+      0.9411764705882353
+    ],
+    [
+      0.09019607843137255,
+      0.30980392156862746,
+      0.22745098039215686
+    ],
+    [
+      0.20784313725490197,
+      0.592156862745098,
+      0.2901960784313726
+    ],
+    [
+      0.5607843137254902,
+      0.8235294117647058,
+      0.3058823529411765
+    ],
+    [
+      0.1411764705882353,
+      0.3764705882352941,
+      0.35294117647058826
+    ],
+    [
+      0.34509803921568627,
+      0.7098039215686275,
+      0.5568627450980392
+    ],
+    [
+      0.07058823529411765,
+      0.1568627450980392,
+      0.2901960784313726
+    ],
+    [
+      0.33725490196078434,
+      0.7058823529411765,
+      1
+    ],
+    [
+      0.41568627450980394,
+      0.2901960784313726,
+      0.1568627450980392
+    ],
+    [
+      1,
+      0.9529411764705882,
+      0.8627450980392157
+    ],
+    [
+      0.35294117647058826,
+      1,
+      0.8392156862745098
+    ],
+    [
+      1,
+      0.3686274509803922,
+      0.8156862745098039
+    ]
+  ],
+  "background": {
+    "top": [
+      0.10588235294117647,
+      0.5607843137254902,
+      0.6274509803921569
+    ],
+    "bottom": [
+      0.23529411764705882,
+      0.7686274509803922,
+      0.7686274509803922
+    ]
+  },
+  "parts": [
+    {
+      "id": 0,
+      "name": "sand",
+      "group": "sand",
+      "primitives": 1,
+      "planned": 66849,
+      "actual": 66849
+    },
+    {
+      "id": 1,
+      "name": "brain0",
+      "group": "brain0",
+      "primitives": 1,
+      "planned": 4270,
+      "actual": 4270
+    },
+    {
+      "id": 2,
+      "name": "brain1",
+      "group": "brain1",
+      "primitives": 1,
+      "planned": 3278,
+      "actual": 3278
+    },
+    {
+      "id": 3,
+      "name": "brain2",
+      "group": "brain2",
+      "primitives": 1,
+      "planned": 3616,
+      "actual": 3616
+    },
+    {
+      "id": 4,
+      "name": "stag0",
+      "group": "stag0",
+      "primitives": 87,
+      "planned": 21640,
+      "actual": 21640
+    },
+    {
+      "id": 5,
+      "name": "stag1",
+      "group": "stag1",
+      "primitives": 87,
+      "planned": 7679,
+      "actual": 7679
+    },
+    {
+      "id": 6,
+      "name": "stag2",
+      "group": "stag2",
+      "primitives": 87,
+      "planned": 3190,
+      "actual": 3190
+    },
+    {
+      "id": 7,
+      "name": "stag3",
+      "group": "stag3",
+      "primitives": 87,
+      "planned": 2314,
+      "actual": 2314
+    },
+    {
+      "id": 8,
+      "name": "sponge0",
+      "group": "sponge0",
+      "primitives": 5,
+      "planned": 19381,
+      "actual": 19381
+    },
+    {
+      "id": 9,
+      "name": "sponge1",
+      "group": "sponge1",
+      "primitives": 3,
+      "planned": 9767,
+      "actual": 9767
+    },
+    {
+      "id": 10,
+      "name": "fan0",
+      "group": "fan0",
+      "primitives": 2,
+      "planned": 11445,
+      "actual": 11445
+    },
+    {
+      "id": 11,
+      "name": "fan1",
+      "group": "fan1",
+      "primitives": 2,
+      "planned": 7281,
+      "actual": 7281
+    },
+    {
+      "id": 12,
+      "name": "fan2",
+      "group": "fan2",
+      "primitives": 2,
+      "planned": 8908,
+      "actual": 8908
+    },
+    {
+      "id": 13,
+      "name": "fan3",
+      "group": "fan3",
+      "primitives": 2,
+      "planned": 6238,
+      "actual": 6238
+    },
+    {
+      "id": 14,
+      "name": "anemone",
+      "group": "anemone",
+      "primitives": 3,
+      "planned": 6991,
+      "actual": 6991
+    },
+    {
+      "id": 15,
+      "name": "anem0_0",
+      "group": "anem0",
+      "primitives": 1,
+      "planned": 719,
+      "actual": 719
+    },
+    {
+      "id": 16,
+      "name": "anem0_1",
+      "group": "anem0",
+      "primitives": 1,
+      "planned": 477,
+      "actual": 477
+    },
+    {
+      "id": 17,
+      "name": "anem0_2",
+      "group": "anem0",
+      "primitives": 2,
+      "planned": 357,
+      "actual": 357
+    },
+    {
+      "id": 18,
+      "name": "anem1_0",
+      "group": "anem1",
+      "primitives": 1,
+      "planned": 725,
+      "actual": 725
+    },
+    {
+      "id": 19,
+      "name": "anem1_1",
+      "group": "anem1",
+      "primitives": 1,
+      "planned": 473,
+      "actual": 473
+    },
+    {
+      "id": 20,
+      "name": "anem1_2",
+      "group": "anem1",
+      "primitives": 2,
+      "planned": 363,
+      "actual": 363
+    },
+    {
+      "id": 21,
+      "name": "anem2_0",
+      "group": "anem2",
+      "primitives": 1,
+      "planned": 738,
+      "actual": 738
+    },
+    {
+      "id": 22,
+      "name": "anem2_1",
+      "group": "anem2",
+      "primitives": 1,
+      "planned": 499,
+      "actual": 499
+    },
+    {
+      "id": 23,
+      "name": "anem2_2",
+      "group": "anem2",
+      "primitives": 2,
+      "planned": 354,
+      "actual": 354
+    },
+    {
+      "id": 24,
+      "name": "anem3_0",
+      "group": "anem3",
+      "primitives": 1,
+      "planned": 756,
+      "actual": 756
+    },
+    {
+      "id": 25,
+      "name": "anem3_1",
+      "group": "anem3",
+      "primitives": 1,
+      "planned": 478,
+      "actual": 478
+    },
+    {
+      "id": 26,
+      "name": "anem3_2",
+      "group": "anem3",
+      "primitives": 2,
+      "planned": 363,
+      "actual": 363
+    },
+    {
+      "id": 27,
+      "name": "anem4_0",
+      "group": "anem4",
+      "primitives": 1,
+      "planned": 760,
+      "actual": 760
+    },
+    {
+      "id": 28,
+      "name": "anem4_1",
+      "group": "anem4",
+      "primitives": 1,
+      "planned": 481,
+      "actual": 481
+    },
+    {
+      "id": 29,
+      "name": "anem4_2",
+      "group": "anem4",
+      "primitives": 2,
+      "planned": 365,
+      "actual": 365
+    },
+    {
+      "id": 30,
+      "name": "anem5_0",
+      "group": "anem5",
+      "primitives": 1,
+      "planned": 765,
+      "actual": 765
+    },
+    {
+      "id": 31,
+      "name": "anem5_1",
+      "group": "anem5",
+      "primitives": 1,
+      "planned": 487,
+      "actual": 487
+    },
+    {
+      "id": 32,
+      "name": "anem5_2",
+      "group": "anem5",
+      "primitives": 2,
+      "planned": 360,
+      "actual": 360
+    },
+    {
+      "id": 33,
+      "name": "anem6_0",
+      "group": "anem6",
+      "primitives": 1,
+      "planned": 749,
+      "actual": 749
+    },
+    {
+      "id": 34,
+      "name": "anem6_1",
+      "group": "anem6",
+      "primitives": 1,
+      "planned": 493,
+      "actual": 493
+    },
+    {
+      "id": 35,
+      "name": "anem6_2",
+      "group": "anem6",
+      "primitives": 2,
+      "planned": 351,
+      "actual": 351
+    },
+    {
+      "id": 36,
+      "name": "anem7_0",
+      "group": "anem7",
+      "primitives": 1,
+      "planned": 765,
+      "actual": 765
+    },
+    {
+      "id": 37,
+      "name": "anem7_1",
+      "group": "anem7",
+      "primitives": 1,
+      "planned": 494,
+      "actual": 494
+    },
+    {
+      "id": 38,
+      "name": "anem7_2",
+      "group": "anem7",
+      "primitives": 2,
+      "planned": 353,
+      "actual": 353
+    },
+    {
+      "id": 39,
+      "name": "anem8_0",
+      "group": "anem8",
+      "primitives": 1,
+      "planned": 766,
+      "actual": 766
+    },
+    {
+      "id": 40,
+      "name": "anem8_1",
+      "group": "anem8",
+      "primitives": 1,
+      "planned": 504,
+      "actual": 504
+    },
+    {
+      "id": 41,
+      "name": "anem8_2",
+      "group": "anem8",
+      "primitives": 2,
+      "planned": 358,
+      "actual": 358
+    },
+    {
+      "id": 42,
+      "name": "clam",
+      "group": "clam",
+      "primitives": 2,
+      "planned": 18632,
+      "actual": 18632
+    },
+    {
+      "id": 43,
+      "name": "clamTop",
+      "group": "clamTop",
+      "primitives": 1,
+      "planned": 9998,
+      "actual": 9998
+    },
+    {
+      "id": 44,
+      "name": "fish0",
+      "group": "fish0",
+      "primitives": 3,
+      "planned": 1687,
+      "actual": 1687
+    },
+    {
+      "id": 45,
+      "name": "fish1",
+      "group": "fish1",
+      "primitives": 3,
+      "planned": 1710,
+      "actual": 1710
+    },
+    {
+      "id": 46,
+      "name": "fish2",
+      "group": "fish2",
+      "primitives": 3,
+      "planned": 1667,
+      "actual": 1667
+    },
+    {
+      "id": 47,
+      "name": "fish3",
+      "group": "fish3",
+      "primitives": 3,
+      "planned": 1631,
+      "actual": 1631
+    },
+    {
+      "id": 48,
+      "name": "fish4",
+      "group": "fish4",
+      "primitives": 3,
+      "planned": 1644,
+      "actual": 1644
+    },
+    {
+      "id": 49,
+      "name": "fish5",
+      "group": "fish5",
+      "primitives": 3,
+      "planned": 1623,
+      "actual": 1623
+    },
+    {
+      "id": 50,
+      "name": "fish6",
+      "group": "fish6",
+      "primitives": 3,
+      "planned": 1720,
+      "actual": 1720
+    },
+    {
+      "id": 51,
+      "name": "fish7",
+      "group": "fish7",
+      "primitives": 3,
+      "planned": 1674,
+      "actual": 1674
+    },
+    {
+      "id": 52,
+      "name": "fish8",
+      "group": "fish8",
+      "primitives": 3,
+      "planned": 1648,
+      "actual": 1648
+    },
+    {
+      "id": 53,
+      "name": "fish9",
+      "group": "fish9",
+      "primitives": 3,
+      "planned": 1693,
+      "actual": 1693
+    },
+    {
+      "id": 54,
+      "name": "fish10",
+      "group": "fish10",
+      "primitives": 3,
+      "planned": 1557,
+      "actual": 1557
+    },
+    {
+      "id": 55,
+      "name": "fish11",
+      "group": "fish11",
+      "primitives": 3,
+      "planned": 1682,
+      "actual": 1682
+    },
+    {
+      "id": 56,
+      "name": "turtle",
+      "group": "turtle",
+      "primitives": 5,
+      "planned": 12263,
+      "actual": 12263
+    },
+    {
+      "id": 57,
+      "name": "flipper10",
+      "group": "turtle",
+      "primitives": 2,
+      "planned": 2032,
+      "actual": 2032
+    },
+    {
+      "id": 58,
+      "name": "flipper-10",
+      "group": "turtle",
+      "primitives": 2,
+      "planned": 2244,
+      "actual": 2244
+    },
+    {
+      "id": 59,
+      "name": "flipper11",
+      "group": "turtle",
+      "primitives": 2,
+      "planned": 1222,
+      "actual": 1222
+    },
+    {
+      "id": 60,
+      "name": "flipper-11",
+      "group": "turtle",
+      "primitives": 2,
+      "planned": 1142,
+      "actual": 1142
+    },
+    {
+      "id": 61,
+      "name": "kelp0_0",
+      "group": "kelp0",
+      "primitives": 3,
+      "planned": 1667,
+      "actual": 1667
+    },
+    {
+      "id": 62,
+      "name": "kelp0_1",
+      "group": "kelp0",
+      "primitives": 3,
+      "planned": 1667,
+      "actual": 1667
+    },
+    {
+      "id": 63,
+      "name": "kelp0_2",
+      "group": "kelp0",
+      "primitives": 3,
+      "planned": 1568,
+      "actual": 1568
+    },
+    {
+      "id": 64,
+      "name": "kelp1_0",
+      "group": "kelp1",
+      "primitives": 3,
+      "planned": 1579,
+      "actual": 1579
+    },
+    {
+      "id": 65,
+      "name": "kelp1_1",
+      "group": "kelp1",
+      "primitives": 3,
+      "planned": 1524,
+      "actual": 1524
+    },
+    {
+      "id": 66,
+      "name": "kelp1_2",
+      "group": "kelp1",
+      "primitives": 3,
+      "planned": 1842,
+      "actual": 1842
+    },
+    {
+      "id": 67,
+      "name": "kelp2_0",
+      "group": "kelp2",
+      "primitives": 3,
+      "planned": 1546,
+      "actual": 1546
+    },
+    {
+      "id": 68,
+      "name": "kelp2_1",
+      "group": "kelp2",
+      "primitives": 3,
+      "planned": 1459,
+      "actual": 1459
+    },
+    {
+      "id": 69,
+      "name": "kelp2_2",
+      "group": "kelp2",
+      "primitives": 3,
+      "planned": 1459,
+      "actual": 1459
+    },
+    {
+      "id": 70,
+      "name": "kelp3_0",
+      "group": "kelp3",
+      "primitives": 3,
+      "planned": 1590,
+      "actual": 1590
+    },
+    {
+      "id": 71,
+      "name": "kelp3_1",
+      "group": "kelp3",
+      "primitives": 3,
+      "planned": 1689,
+      "actual": 1689
+    },
+    {
+      "id": 72,
+      "name": "kelp3_2",
+      "group": "kelp3",
+      "primitives": 3,
+      "planned": 1788,
+      "actual": 1788
+    },
+    {
+      "id": 73,
+      "name": "grass0",
+      "group": "grass0",
+      "primitives": 22,
+      "planned": 5630,
+      "actual": 5630
+    },
+    {
+      "id": 74,
+      "name": "grass1",
+      "group": "grass1",
+      "primitives": 22,
+      "planned": 5687,
+      "actual": 5687
+    },
+    {
+      "id": 75,
+      "name": "grass2",
+      "group": "grass2",
+      "primitives": 22,
+      "planned": 5083,
+      "actual": 5083
+    },
+    {
+      "id": 76,
+      "name": "rocks",
+      "group": "rocks",
+      "primitives": 14,
+      "planned": 8000,
+      "actual": 8000
+    },
+    {
+      "id": 77,
+      "name": "urchins",
+      "group": "urchins",
+      "primitives": 51,
+      "planned": 9472,
+      "actual": 9472
+    },
+    {
+      "id": 78,
+      "name": "starfish",
+      "group": "starfish",
+      "primitives": 18,
+      "planned": 5387,
+      "actual": 5387
+    },
+    {
+      "id": 79,
+      "name": "pebbles",
+      "group": "pebbles",
+      "primitives": 44,
+      "planned": 8457,
+      "actual": 8457
+    },
+    {
+      "id": 80,
+      "name": "lumens",
+      "group": "lumens",
+      "primitives": 20,
+      "planned": 622,
+      "actual": 622
+    },
+    {
+      "id": 81,
+      "name": "bubbles0",
+      "group": "bubbles0",
+      "primitives": 5,
+      "planned": 1835,
+      "actual": 1835
+    },
+    {
+      "id": 82,
+      "name": "bubbles1",
+      "group": "bubbles1",
+      "primitives": 5,
+      "planned": 1694,
+      "actual": 1694
+    },
+    {
+      "id": 83,
+      "name": "bubbles2",
+      "group": "bubbles2",
+      "primitives": 5,
+      "planned": 1591,
+      "actual": 1591
+    },
+    {
+      "id": 84,
+      "name": "motes",
+      "group": "motes",
+      "primitives": 90,
+      "planned": 900,
+      "actual": 900
+    },
+    {
+      "id": 85,
+      "name": "shaft0",
+      "group": "shaft0",
+      "primitives": 1,
+      "planned": 1500,
+      "actual": 1500
+    },
+    {
+      "id": 86,
+      "name": "shaft1",
+      "group": "shaft1",
+      "primitives": 1,
+      "planned": 1500,
+      "actual": 1500
+    },
+    {
+      "id": 87,
+      "name": "shaft2",
+      "group": "shaft2",
+      "primitives": 1,
+      "planned": 1500,
+      "actual": 1500
+    },
+    {
+      "id": 88,
+      "name": "shaft3",
+      "group": "shaft3",
+      "primitives": 1,
+      "planned": 1500,
+      "actual": 1500
+    }
+  ],
+  "source": {
+    "name": "SyntaxSplat",
+    "author": "iamvillain",
+    "license": "MIT",
+    "path": "C:/Users/zhulu/Downloads/SyntaxSplat-main/SyntaxSplat-main",
+    "hashes": {
+      "engine.js": "9e232975f5a65f8ae88065de85b8173560582ed0ff7ead009a03074b00cffa6a",
+      "export.js": "d3bad620444b3d1832421531522b3d3a49f55826e5152625d6813e63098eb4b5",
+      "three.js": "76dea8151bc9352aef3528b4262e249b2604f62543828328db978d060d61a495",
+      "scenes/reef.js": "d8e0697af8c3aeb8b8aa492b499a4aa5c310b99087aea05da4ad4d4b7213a714"
+    },
+    "dependency": "three.js 0.160.0 (MIT)",
+    "lighting": "source baked rest-pose lighting; no dynamic particle emitters"
+  },
+  "bake_seconds": 8.127483499999999,
+  "ply_sha256": "c12905a3ec6c0c5292925062575c072ac81b7675544694b313c9b8d7cd5cb32c"
+}

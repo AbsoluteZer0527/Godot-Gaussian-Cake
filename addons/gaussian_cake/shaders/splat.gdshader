@@ -3,6 +3,7 @@ render_mode unshaded, cull_disabled, depth_draw_never, blend_mix, fog_disabled;
 
 uniform sampler2D frame_a : filter_nearest, repeat_disable;
 uniform sampler2D frame_b : filter_nearest, repeat_disable;
+uniform sampler2D splat_order : filter_nearest, repeat_disable;
 uniform float frame_blend = 0.0;
 uniform float camera_near = 0.05;
 varying vec2 pixel_delta;
@@ -27,7 +28,8 @@ mat3 rotation(vec4 q) {
 		vec3(2.0*(x.x*x.z+q.w*x.y), 2.0*(x.y*x.z-q.w*x.x), 1.0-2.0*(x.x*x.x+x.y*x.y)));
 }
 void vertex() {
-	int id = int(INSTANCE_CUSTOM.x+0.5) + 256*int(INSTANCE_CUSTOM.y+0.5);
+	int slot = int(INSTANCE_CUSTOM.x+0.5) + 256*int(INSTANCE_CUSTOM.y+0.5);
+	int id = int(texelFetch(splat_order, ivec2(slot % 256, slot / 256), 0).r + 0.5);
 	vec2 a0=record(frame_a,id,0), a1=record(frame_a,id,1), a2=record(frame_a,id,2), a3=record(frame_a,id,3);
 	vec2 b0=record(frame_b,id,0), b1=record(frame_b,id,1), b2=record(frame_b,id,2), b3=record(frame_b,id,3);
 	vec3 center=mix(vec3(a0,a1.x),vec3(b0,b1.x),frame_blend);

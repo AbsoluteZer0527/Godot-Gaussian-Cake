@@ -1,0 +1,100 @@
+{
+  "assets": [
+    {
+      "id": "a",
+      "path": "../sources/slime.ply"
+    },
+    {
+      "id": "b",
+      "path": "../sources/stone.ply"
+    }
+  ],
+  "bake": {
+    "cotan": true,
+    "fallback_color": [
+      0.8485281467437744,
+      0.8485281467437744,
+      0.8602325320243835
+    ],
+    "fit_stiffness": 1.0,
+    "method": 0,
+    "mixture_k": 8,
+    "posterior_temperature": 1.0,
+    "samples": 5000,
+    "sdf_resolution": 64,
+    "seed": 42,
+    "sinkhorn_epsilon": 0.05000000074505806,
+    "sphere_match": true
+  },
+  "export": {
+    "fps": 16,
+    "normal_tolerance": 0.009999999776482582,
+    "position_tolerance": 0.0010000000474974513,
+    "rigid": false,
+    "scale": 1.0,
+    "settle_seconds": 5.0
+  },
+  "format": "GaussianCakeProject",
+  "keys": [
+    "a",
+    "b"
+  ],
+  "loop": false,
+  "mode": "splats",
+  "normalization": "independent-aabb",
+  "origin": {
+    "enabled": false,
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "segments": [
+    {
+      "base_preset": 0,
+      "duration": 0.75,
+      "easing_linked": true,
+      "paint": [],
+      "pins": [],
+      "preset": 0,
+      "style": {
+        "cohesion": 0,
+        "early": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "jiggle": 0,
+        "late": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "mid_grow": 0,
+        "name": "Classic",
+        "origin": 0,
+        "sag": 0,
+        "wave": 0
+      }
+    }
+  ],
+  "selected": 0,
+  "splats": {
+    "area_preserve": false,
+    "color_match": 0.3499999940395355,
+    "count": 48000,
+    "crop_radius": 100.0,
+    "export_dc_only": false,
+    "mixture_k": 8,
+    "posterior_temperature": 1.0,
+    "samples": 1200,
+    "sh_degree": 3,
+    "sinkhorn_epsilon": 0.05000000074505806,
+    "size": 1.0,
+    "up": 0
+  },
+  "version": 2
+}

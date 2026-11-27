@@ -1,0 +1,30 @@
+{
+  "format": "GaussianCakeFormProject",
+  "version": 1,
+  "default_duration": 4.0,
+  "splats": {
+    "reference": "cactus",
+    "count": 48000,
+    "samples": 2400,
+    "mixtures": 16,
+    "color_match": 0.35,
+    "size": 1.0,
+    "up": 0,
+    "crop": 100.0,
+    "dc_only": true,
+    "forms": [
+      {
+        "name": "cactus",
+        "source": "cactus.ply"
+      },
+      {
+        "name": "island",
+        "source": "island.ply"
+      },
+      {
+        "name": "reef",
+        "source": "reef.ply"
+      }
+    ]
+  }
+}

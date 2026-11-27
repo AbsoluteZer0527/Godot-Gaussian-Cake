@@ -1,0 +1,15 @@
+[remap]
+
+importer="gaussian_cake.forms_v1"
+importer_version=1
+type="Resource"
+uid="uid://4kxrhn5b3y51"
+path="res://.godot/imported/forms.gcforms-729cc5b240a388b7cfe13d83a6ef6313.res"
+
+[deps]
+
+source_file="res://tests/fixtures/transport_maps/forms.gcforms"
+dest_files=["res://.godot/imported/forms.gcforms-729cc5b240a388b7cfe13d83a6ef6313.res"]
+
+[params]
+

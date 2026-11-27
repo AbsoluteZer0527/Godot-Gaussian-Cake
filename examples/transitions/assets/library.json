@@ -1,0 +1,171 @@
+{
+  "color_space": "linear",
+  "duration": 4.0,
+  "format": "GaussianCakeFormLibrary",
+  "names": [
+    "cactus",
+    "island",
+    "reef"
+  ],
+  "splats": "forms.gcforms",
+  "transport_maps": [
+    {
+      "from": "cactus",
+      "metrics": {
+        "after": {
+          "objective": 0.3607452516481092,
+          "p95_distance": 0.9290735342274539,
+          "rms_color": 0.4065379367170545,
+          "rms_distance": 0.5835231771951203
+        },
+        "before": {
+          "objective": 0.36609957414718247,
+          "p95_distance": 0.9300863216109184,
+          "rms_color": 0.41903594446686054,
+          "rms_distance": 0.5870175996870022
+        },
+        "color_weight": 0.3499999940395355,
+        "hierarchical_start": false,
+        "milliseconds": 2554.18,
+        "neighbors": 24,
+        "passes": 8,
+        "swaps": 54652
+      },
+      "path": "transport_0_1_8f47e323f847b473.gcmap",
+      "to": "island"
+    },
+    {
+      "from": "island",
+      "metrics": {
+        "after": {
+          "objective": 0.3607452516481092,
+          "p95_distance": 0.9290735342274539,
+          "rms_color": 0.4065379367170545,
+          "rms_distance": 0.5835231771951203
+        },
+        "before": {
+          "objective": 0.36609957414718247,
+          "p95_distance": 0.9300863216109184,
+          "rms_color": 0.41903594446686054,
+          "rms_distance": 0.5870175996870022
+        },
+        "color_weight": 0.3499999940395355,
+        "hierarchical_start": false,
+        "milliseconds": 2554.18,
+        "neighbors": 24,
+        "passes": 8,
+        "swaps": 54652
+      },
+      "path": "transport_1_0_72cef1d9190d5b9f.gcmap",
+      "to": "cactus"
+    },
+    {
+      "from": "island",
+      "metrics": {
+        "after": {
+          "objective": 0.11419667848495661,
+          "p95_distance": 0.3938125682475011,
+          "rms_color": 0.6046899470330906,
+          "rms_distance": 0.2634474583960034
+        },
+        "before": {
+          "objective": 0.13540193955405444,
+          "p95_distance": 0.49375070440183844,
+          "rms_color": 0.6282055639633289,
+          "rms_distance": 0.2950563809728673
+        },
+        "color_weight": 0.3499999940395355,
+        "hierarchical_start": true,
+        "milliseconds": 2443.0087,
+        "neighbors": 24,
+        "passes": 8,
+        "swaps": 65766
+      },
+      "path": "transport_1_2_e2fe0349ed1228f7.gcmap",
+      "to": "reef"
+    },
+    {
+      "from": "reef",
+      "metrics": {
+        "after": {
+          "objective": 0.11419667848495661,
+          "p95_distance": 0.3938125682475011,
+          "rms_color": 0.6046899470330906,
+          "rms_distance": 0.2634474583960034
+        },
+        "before": {
+          "objective": 0.13540193955405444,
+          "p95_distance": 0.49375070440183844,
+          "rms_color": 0.6282055639633289,
+          "rms_distance": 0.2950563809728673
+        },
+        "color_weight": 0.3499999940395355,
+        "hierarchical_start": true,
+        "milliseconds": 2443.0087,
+        "neighbors": 24,
+        "passes": 8,
+        "swaps": 65766
+      },
+      "path": "transport_2_1_296270fa99852b53.gcmap",
+      "to": "island"
+    },
+    {
+      "from": "reef",
+      "metrics": {
+        "after": {
+          "objective": 0.42718707393198324,
+          "p95_distance": 1.0211764079634964,
+          "rms_color": 0.46161787041131425,
+          "rms_distance": 0.6333114716957142
+        },
+        "before": {
+          "objective": 0.4493906077068196,
+          "p95_distance": 1.0876046159880213,
+          "rms_color": 0.4847610258605062,
+          "rms_distance": 0.6485398486551192
+        },
+        "color_weight": 0.3499999940395355,
+        "hierarchical_start": true,
+        "milliseconds": 2571.9226,
+        "neighbors": 24,
+        "passes": 8,
+        "swaps": 123681
+      },
+      "path": "transport_2_0_15c3287d63fab43f.gcmap",
+      "to": "cactus"
+    },
+    {
+      "from": "cactus",
+      "metrics": {
+        "after": {
+          "objective": 0.42718707393198324,
+          "p95_distance": 1.0211764079634964,
+          "rms_color": 0.46161787041131425,
+          "rms_distance": 0.6333114716957142
+        },
+        "before": {
+          "objective": 0.4493906077068196,
+          "p95_distance": 1.0876046159880213,
+          "rms_color": 0.4847610258605062,
+          "rms_distance": 0.6485398486551192
+        },
+        "color_weight": 0.3499999940395355,
+        "hierarchical_start": true,
+        "milliseconds": 2571.9226,
+        "neighbors": 24,
+        "passes": 8,
+        "swaps": 123681
+      },
+      "path": "transport_0_2_f1c142196d5b8933.gcmap",
+      "to": "reef"
+    }
+  ],
+  "transport_profile": {
+    "algorithm": "hierarchical-assignment-kd-swap",
+    "cost": "mean_squared_position + color_weight^2 * mean_squared_linear_rgb",
+    "mass": "equal per splat",
+    "optimality": "approximate; selected pair cost never exceeds shared-ID baseline",
+    "version": 1
+  },
+  "version": 1
+}

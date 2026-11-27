@@ -1,0 +1,15 @@
+[remap]
+
+importer="gaussian_cake.forms_v1"
+importer_version=1
+type="Resource"
+uid="uid://dygap8qp1p1at"
+path="res://.godot/imported/forms.gcforms-c75f4e31970f5efc24d86564f28793e3.res"
+
+[deps]
+
+source_file="res://examples/slime/assets/forms/forms.gcforms"
+dest_files=["res://.godot/imported/forms.gcforms-c75f4e31970f5efc24d86564f28793e3.res"]
+
+[params]
+

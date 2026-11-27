@@ -1,0 +1,15 @@
+[remap]
+
+importer="gaussian_cake.transport_map_v1"
+importer_version=1
+type="Resource"
+uid="uid://3508lvr8fi8j"
+path="res://.godot/imported/2_0.gcmap-e954fb36b679eb5b8ff2a586cecfef48.res"
+
+[deps]
+
+source_file="res://tests/fixtures/transport_maps/2_0.gcmap"
+dest_files=["res://.godot/imported/2_0.gcmap-e954fb36b679eb5b8ff2a586cecfef48.res"]
+
+[params]
+

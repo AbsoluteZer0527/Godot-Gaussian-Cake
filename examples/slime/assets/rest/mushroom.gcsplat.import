@@ -1,0 +1,16 @@
+[remap]
+
+importer="gaussian_cake.splat_v1"
+importer_version=1
+type="Resource"
+uid="uid://cr72r0npb5dul"
+path="res://.godot/imported/mushroom.gcsplat-f25d3416a2c50405e56c810e2b61fbb4.res"
+
+[deps]
+
+source_file="res://examples/slime/assets/rest/mushroom.gcsplat"
+dest_files=["res://.godot/imported/mushroom.gcsplat-f25d3416a2c50405e56c810e2b61fbb4.res"]
+
+[params]
+
+limits/max_splats=50000

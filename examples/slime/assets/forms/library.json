@@ -1,0 +1,18 @@
+{
+  "color_space": "linear",
+  "colors": "form_colors.png",
+  "duration": 1.5,
+  "format": "GaussianCakeFormLibrary",
+  "names": [
+    "slime",
+    "mushroom",
+    "stone",
+    "apple",
+    "crate"
+  ],
+  "rows_per_form": 8,
+  "splats": "forms.gcforms",
+  "topology": "forms.glb",
+  "version": 1,
+  "vertices": 7272
+}

@@ -1,0 +1,1 @@
+{"format": "GaussianCakeFormLibrary", "version": 1, "color_space": "linear", "names": ["slime", "apple", "mushroom", "stone", "crate"], "splats": "forms.gcforms", "transport_maps": [{"to": "apple", "path": "0_1.gcmap", "from": "slime"}, {"to": "mushroom", "path": "1_2.gcmap", "from": "apple"}, {"to": "slime", "path": "2_0.gcmap", "from": "mushroom"}]}

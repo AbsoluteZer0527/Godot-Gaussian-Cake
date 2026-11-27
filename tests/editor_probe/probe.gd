@@ -16,10 +16,21 @@ func frames(count: int) -> void:
 	for i in range(count):
 		await get_tree().process_frame
 
+func wait_for(condition: Callable, label: String) -> bool:
+	# Import and editor resource updates do not finish in a fixed frame count.
+	# Keep every assertion, but wait for the state it actually promises to test.
+	var deadline := Time.get_ticks_msec() + 10000
+	while not condition.call() and Time.get_ticks_msec() < deadline:
+		await get_tree().process_frame
+	var complete: bool = condition.call()
+	check(complete, label)
+	return complete
+
 func _run() -> void:
 	await frames(20)
 	var editor := get_editor_interface()
 	check(editor.is_plugin_enabled("gaussian_cake"), "addon enabled")
+	await wait_for(func(): return not editor.get_resource_filesystem().is_scanning(), "initial filesystem scan finishes")
 	var root := editor.get_edited_scene_root()
 	if root == null:
 		root = Node3D.new()
@@ -34,14 +45,13 @@ func _run() -> void:
 	splats.clip = load(path)
 	root.add_child(splats)
 	splats.owner = root
-	await frames(8)
+	await wait_for(func(): return topology.duration > 0.0 and splats.duration > 0.0 and not topology._rebuild_pending and not splats._rebuild_pending, "editor playback initializes")
 	check(topology.error.is_empty() and splats.error.is_empty(), "editor nodes load")
 	topology.preview_progress = 0.4
 	splats.preview_progress = 0.6
-	await frames(4)
-	check(is_equal_approx(topology.progress, 0.4) and is_equal_approx(splats.progress, 0.6), "Inspector preview progress")
+	await wait_for(func(): return is_equal_approx(topology.progress, 0.4) and is_equal_approx(splats.progress, 0.6), "Inspector preview progress")
 	check(not topology.playing and not splats.playing, "no editor autoplay")
-	check(is_instance_valid(splats._preview_camera) and splats._frame_a != null, "editor camera and GPU preview buffers")
+	await wait_for(func(): return is_instance_valid(splats._preview_camera) and splats._frame_a != null, "editor camera and GPU preview buffers")
 	for i in range(2):
 		editor.set_plugin_enabled("gaussian_cake", false)
 		await frames(2)
@@ -50,12 +60,12 @@ func _run() -> void:
 		await frames(4)
 		check(editor.is_plugin_enabled("gaussian_cake"), "reenable addon")
 	# Changing registered extensions requires an editor filesystem scan to finish.
-	await get_tree().create_timer(0.5).timeout
+	await wait_for(func(): return not editor.get_resource_filesystem().is_scanning(), "plugin registration scan finishes")
 	editor.get_resource_filesystem().scan()
-	await frames(2)
-	while editor.get_resource_filesystem().is_scanning():
-		await frames(1)
-	await frames(10)
+	await wait_for(func(): return not editor.get_resource_filesystem().is_scanning(), "explicit filesystem scan finishes")
+	# is_scanning can clear before deferred scan actions re-add an extension that
+	# was temporarily unregistered. Reimport requires the EditorFileSystem entry.
+	await wait_for(func(): return not editor.get_resource_filesystem().get_file_type(path).is_empty(), "clip rediscovered after plugin registration")
 	# Modify only this isolated project's fixture and verify the live node sees reimport.
 	var original := FileAccess.get_file_as_bytes(path)
 	var changed := original.duplicate()
@@ -66,14 +76,12 @@ func _run() -> void:
 	file.store_buffer(changed)
 	file.close()
 	editor.get_resource_filesystem().reimport_files(PackedStringArray([path]))
-	await frames(12)
-	check(is_equal_approx(splats.duration, 2.0), "live splat reimport updates duration")
+	await wait_for(func(): return is_equal_approx(splats.duration, 2.0), "live splat reimport updates duration")
 	file = FileAccess.open(path, FileAccess.WRITE)
 	file.store_buffer(original)
 	file.close()
 	editor.get_resource_filesystem().reimport_files(PackedStringArray([path, "res://examples/assets/round_to_tall.glb"]))
-	await frames(12)
-	check(is_equal_approx(splats.duration, 1.0) and topology.error.is_empty(), "source restore and GLB reimport")
+	await wait_for(func(): return is_equal_approx(splats.duration, 1.0) and topology.error.is_empty(), "source restore and GLB reimport")
 	print("Gaussian Cake editor tests: %d failures" % failures)
 	var report := FileAccess.open("res://editor-test-result.txt", FileAccess.WRITE)
 	report.store_string(str(failures))

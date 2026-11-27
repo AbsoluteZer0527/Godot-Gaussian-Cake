@@ -1,0 +1,68 @@
+{
+  "format": "GaussianCakeFormProject",
+  "version": 1,
+  "default_duration": 1.5,
+  "topology": {
+    "path": "shared_topology.json"
+  },
+  "splats": {
+    "reference": "slime",
+    "forms": [
+      {
+        "name": "slime",
+        "clip": "../../assets/morphs/slime_to_mushroom.gcsplat",
+        "frame": 0,
+        "scale": 1.0305825398569697,
+        "center": [
+          0.009064160645773978,
+          0.9521194621899086,
+          0.005505286548629695
+        ]
+      },
+      {
+        "name": "mushroom",
+        "clip": "../../assets/morphs/slime_to_mushroom.gcsplat",
+        "frame": 12,
+        "scale": 1.1161414754271783,
+        "center": [
+          -4.398871878341648e-05,
+          0.8202896365233898,
+          -0.0013863154572000824
+        ]
+      },
+      {
+        "name": "stone",
+        "clip": "../../assets/morphs/slime_to_stone.gcsplat",
+        "frame": 12,
+        "scale": 1.0961853424272099,
+        "center": [
+          -0.011005036611429486,
+          0.6325000000000002,
+          0.021009401213869627
+        ]
+      },
+      {
+        "name": "apple",
+        "clip": "../../assets/morphs/slime_to_apple.gcsplat",
+        "frame": 12,
+        "scale": 0.9341744882076979,
+        "center": [
+          0.04623135700017872,
+          0.9591744882076978,
+          0.023364479495653734
+        ]
+      },
+      {
+        "name": "crate",
+        "clip": "../../assets/morphs/slime_to_crate.gcsplat",
+        "frame": 12,
+        "scale": 0.8541500000000002,
+        "center": [
+          0.0,
+          0.8499451887712881,
+          0.03624243517665754
+        ]
+      }
+    ]
+  }
+}

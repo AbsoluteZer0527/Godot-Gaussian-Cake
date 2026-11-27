@@ -1,154 +1,133 @@
 # Gaussian Cake for Godot
 
-A Godot 4 addon for playing shared-topology GLB animations and animated Gaussian
-splat clips exported by [Gaussian Cake](https://github.com/AbsoluteZer0527/Gaussian-Cake).
-Version 0.1.0 targets desktop **Godot 4.7.2, Compatibility renderer**.
+A Godot editor addon and runtime player for assets exported by
+[Gaussian Cake](https://github.com/AbsoluteZer0527/Gaussian-Cake). The authoring
+tool prepares models and correspondence; this addon imports the exports and
+plays them in your game. Its **Gaussian Cake** editor dock can also prepare a
+splat morph directly from two PLY/GLB files using the separate `gc_cli` executable.
+Playback requires no custom Godot build, C++ compiler or native extension.
+Tested on **Godot 4.7.2, desktop Compatibility renderer**.
 
-The authoring application does the baking. This repository owns the importer,
-player nodes, shader, and small integration examples. It needs no C++ compiler,
-native extension, authoring-tool checkout, or external package to run.
+## Try it
 
-## Try the included examples
+Import this repository's `project.godot` and let the editor finish importing. The
+plugin is already enabled. Use the Inspector preview below, or open a sample
+scene and press **F6** to run it:
 
-1. Import this repository's `project.godot` into Godot and let assets import.
-   The Gaussian Cake plugin is already enabled in this project.
-2. Press **F5** for the topology example.
-3. Open `examples/splat_preview.tscn` and press **F6** for splats.
-
-**Space** plays/pauses, **Left/Right** orbit, and the slider scrubs.
-Both scenes contain editable camera, stage, lighting, and UI nodes.
-Their procedural round-to-tall fixtures are included: 114 mesh vertices and
-4,096 splats respectively. This is a playback example, not the slime game.
-
-## Install in another game
-
-1. Copy **`addons/gaussian_cake/`** into your project's `addons/` directory.
-2. Enable **Gaussian Cake** in **Project → Project Settings → Plugins**.
-3. Copy your exported `.glb` or `.gcsplat` into the game and let it import.
-4. Add one of these nodes through **Add Node**:
-
-| Node | Inspector assignment |
+| Scene | What to try |
 |---|---|
-| `GaussianCakeTopologyPlayer3D` | Drag the imported GLB into **Topology Asset → Source Scene**. |
-| `GaussianCakeSplatPlayer3D` | Drag the imported `.gcsplat` into **Splat Asset → Clip**. |
+| [Inspector form preview](examples/form_preview.tscn) | Select **Forms**, then use **Morph Preview** in the Inspector without running the game. |
+| [Complex transitions](examples/transitions/showcase.tscn) | Cactus, lighthouse island and reef; orbit, scrub, auto-cycle, **B** for shared/refined mapping, **P** for pixel/raw rendering. |
+| [Slime playground](examples/slime/playground.tscn) | Walk into items to morph. **WASD/arrows** move, **RMB/Q/E** orbit, **R** returns to slime, **M** switches mesh/splats, **P** switches presentation. |
+| [Topology preview](examples/topology_preview.tscn) | A small animated GLB example. |
+| [Splat preview](examples/splat_preview.tscn) | A small baked Gaussian clip example. |
 
-Only the addon folder is required. Keep a `Camera3D` in the game scene.
-The included examples, tests, tools, and source `.gcproject` files are optional.
+**F5** runs the project's configured main scene. The [slime guide](examples/slime/README.md) and
+[showcase guide](examples/transitions/README.md) describe their editable node trees,
+assets and controls.
 
-## Playback and editor preview
+## Use it in your game
 
-Both nodes expose **Autoplay**, **Speed**, and **Loop Mode** (Once, Loop,
-Ping Pong). **Editor Preview → Preview Progress** chooses a static pose from
-0 to 1 in the editor; it does not change the runtime starting time. The splat
-editor preview follows the first 3D editor viewport. Keep the addon enabled for
-editor preview and importing. Runtime players do not call editor APIs.
+To start from model files, choose **Project → Tools → Prepare Gaussian Cake
+morph…**, or click **Prepare PLY/GLB models…** on a form player's Inspector.
+This opens the **Gaussian Cake** dock.
+Choose **Source Model** and **Target Model**, then click **Prepare**. The addon
+imports the result and assigns it to the selected form player, or adds a
+`PreparedMorph` node to the open scene. Select that node and use **Morph Preview**
+to scrub or play. This workflow prepares Gaussian splats from PLY captures or
+static GLB/PLY meshes; arbitrary mesh topology conversion is separate.
+
+The dock detects `gc_cli` in a sibling `Gaussian-Cake/build/Release/` checkout.
+Otherwise select it once under **Preparation settings → Gaussian Cake CLI**.
+The executable is needed only during preparation. See
+[preparing models in Godot](docs/GETTING_STARTED.md#prepare-plyglb-models-in-godot).
+
+1. Copy `addons/gaussian_cake/` into your project's `addons/` folder.
+2. Enable **Gaussian Cake** in **Project → Project Settings → Plugins**.
+3. Copy an exported asset or complete form-library folder into the project and
+   let Godot import it.
+4. Add the appropriate node through **Add Node**, assign its asset, and provide
+   an active `Camera3D`.
+
+| Node | Use for | Inspector assignment |
+|---|---|---|
+| `GaussianCakeFormPlayer3D` | Direct, interruptible transitions between named forms | **Library Path** → exported `library.json` |
+| `GaussianCakeTopologyPlayer3D` | One baked mesh animation | **Topology Asset → Source Scene** → animated `.glb` |
+| `GaussianCakeSplatPlayer3D` | One baked Gaussian animation | **Splat Asset → Clip** → `.gcsplat` |
+
+For the slime-style workflow, use **GaussianCakeFormPlayer3D**. It loads
+`forms.gcforms`, optional topology/color assets, and optional refined pair maps.
+Only the addon and exported runtime assets are required in your game.
+
+To preview without writing code, select the form player and expand **Morph
+Preview** in the Inspector. Choose **Source** and **Target**, scrub **Progress**,
+or use **Play / Pause**, **Reset**, and **Loop**. The node's **Duration** sets
+preview speed. Preview settings are saved for editing and do not change the
+game's starting pose. See [Inspector preview](docs/GETTING_STARTED.md#preview-in-the-inspector-without-code).
+
+Select a form player and open **Form states** at the bottom to connect forms and
+set transition durations. Save the scene to keep its graph override. Geometry is
+shared across all arrows; no per-pair GLB export is needed. See the
+[form guide](docs/FORM_LIBRARIES.md).
+
+Gameplay can still request named forms directly:
 
 ```gdscript
-@onready var morph = $GaussianCakeSplatPlayer3D
+extends Node3D
+
+@onready var forms = $Morph
 
 func _ready() -> void:
-	morph.playback_finished.connect(_on_morph_finished)
-	morph.play()
+	await forms.wait_until_ready()
+	if not forms.initialized:
+		push_error(forms.error)
+		return
+	forms.morph_to("apple", 2.5)
 
-func _on_morph_finished() -> void:
-	print("Finished") # Emitted once at the end in Once mode.
-
-func show_halfway() -> void:
-	morph.pause()
-	morph.seek(morph.duration * 0.5)
+func touch_mushroom() -> void:
+	if forms.initialized:
+		forms.morph_to("mushroom", 2.5)
 ```
 
-| API | Behavior |
-|---|---|
-| `play()` | Resume; restart from zero if Once playback already finished. |
-| `pause()` | Hold the current pose. |
-| `stop()` | Pause and return to zero. |
-| `seek(seconds)` | Clamp to the clip, apply immediately, preserve playing/paused state. Starts the forward leg in Ping Pong. |
-| `duration`, `time`, `progress` | Read-only duration/time in seconds and normalized progress. |
-| `playing`, `error` | Current playback state and last asset/setup error. |
-| `playback_finished` | Signal at completion in Once mode, after the endpoint is applied. |
-| `playback_error(message)` | Signal on asset/setup failure; the same message appears as an editor node warning. |
+Assign `Morph`'s **Library Path** before running, and use names that exist in that
+library. A form player uses normalized `seek(0.5)`; a baked-clip player uses
+`seek(seconds)`. See the **[getting-started guide](docs/GETTING_STARTED.md)** for
+the node tree, Inspector settings, API, authoring commands and export setup.
 
-Topology: leave **Animation Name** empty to use the first non-RESET animation,
-or enter the full imported animation name. The GLB must have **Animation →
-Import** enabled. `get_animation_names()` returns available names. The player
-does not modify the shared Animation's loop mode. **Use Vertex Colors** enables
-COLOR_0 on a per-instance material override when Godot leaves it disabled;
-textures and the other material properties are preserved. Turn it off to keep
-the imported material's original vertex-color setting.
+## What belongs where
 
-Splats: the **Camera** override is optional. By default, the player uses its
-viewport's active camera. It continues sorting when paused if the camera or
-player transform changes. Separate players share clip data but have independent
-clocks, materials, textures, and instance buffers.
+- **Gaussian Cake:** model preparation, shared correspondence, transport
+  refinement and portable export.
+- **This addon:** the preparation dock that invokes the authoring CLI, import
+  validation, playback state, interpolation and Gaussian rendering. A refined
+  pair map changes correspondence; it does not add animation
+  frames. Interrupted refined transitions use the stable-ID fallback.
+- **Your game or sample scene:** movement, collisions, triggers, camera behavior
+  and pixel/toon presentation. The addon does not automatically add those systems.
 
-## Importing and shipping splats
+The current splat profile uses prelit DC color and supports up to **50,000 splats
+per form/clip**, with a 512 MiB input-file budget. Transparency sorting and
+overdraw still cost runtime work. Dynamic splat lighting, view-dependent SH,
+streaming and globally sorted overlapping clouds are outside the current scope.
+See [performance notes](docs/SPLAT_PERFORMANCE.md),
+[form-library authoring](docs/FORM_LIBRARIES.md) and [file formats](docs/FORMAT.md).
 
-The importer recognizes **GCSPLAT version 1**. It validates dimensions, byte
-length, timestamps, bounds, finite attributes, quaternion normalization, scale,
-color, and opacity. Invalid data produces an import error with a reason.
+## Verify and export
 
-Godot stores a `GaussianCakeSplatClip` binary Resource in its import cache. Scenes
-reference the original `.gcsplat` path through Godot's resource remapping. A
-normal game export includes the imported resource automatically: **no manual
-`*.gcsplat` non-resource filter is required**. Keep `.import` sidecars in Git and
-ignore `.godot/`; a fresh checkout rebuilds the cache.
-
-Replacing a source clip triggers reimport. Open players rebuild when their
-resources change. Enable the addon and let the editor finish its filesystem scan
-before importing. If a file was copied while the addon was disabled, enable it
-and use Reimport after scanning completes.
-
-## Current scope and limits
-
-- Desktop Compatibility is the tested renderer. Other renderers/platforms are unverified.
-- One baked transition per asset. Baking, `.gcproject` editing, and topology generation stay in Gaussian Cake.
-- Splat files are capped at 512 MiB; importer and player cap at 50,000 splats.
-  Start with about 5,000. The importer offers a smaller **Limits → Max Splats** cap.
-- CPU depth sorting and GDScript updates are intended for modest clouds. The
-  file budget is not a total RAM budget; validation temporarily copies attributes.
-- A single camera/cloud is the visual correctness target. Spatially separated
-  instances work independently; overlapping clouds and other transparent objects
-  are not globally sorted. Split editor viewports share the first camera's order.
-- Splats use prelit DC color and alpha blending. No view-dependent SH, dynamic
-  lighting/shadows, collision mesh, streaming, GPU sort, or automatic toon/pixel pass.
-- The near plane clips by splat center; opaque depth intersections are approximate.
-- Imported topology keeps the exported fitted mesh and its starting appearance.
-  Shape/material changes that were not exported cannot be recovered by the addon.
-
-## Tests and exports
-
-Replace `godot` with your Godot executable:
+From this repository, replacing `godot` with your executable:
 
 ```sh
-godot --headless --path . --editor --import --quit
-godot --headless --path . --script res://tests/run_tests.gd
 python tools/verify.py --godot /path/to/godot
-```
-
-The Python verification command runs runtime tests, copies only the addon and
-two exported assets into an isolated project, checks editor preview and plugin
-enable/disable, changes a clip to verify live reimport, and exports/runs a PCK.
-It fails on engine errors as well as test failures. Logs and isolated test
-projects stay under ignored `out/` for inspection.
-
-For the included project, export a PCK without installing export templates:
-
-```sh
+python tools/verify.py --godot /path/to/godot --cli /path/to/gc_cli
 godot --headless --path . --editor --export-pack "Desktop PCK" out/gaussian-cake.pck
 godot --main-pack out/gaussian-cake.pck
 ```
 
-An executable export needs Godot's matching export templates. The preset excludes
-editor-only code and tests; runtime playback uses only imported resources.
-
-Fixtures can be regenerated using the authoring repository's CLI:
-
-```sh
-python tools/generate_assets.py --cli ../Gaussian-Cake/build/Release/gc_cli.exe
-```
-
-The `.obj`, `.gcproject`, `.glb`, and `.gcsplat` fixtures are intentionally small,
-tracked assets. The generator, included projects, and [format reference](docs/FORMAT.md)
-record how they were produced. The slime game should consume a tagged addon
-release from its own repository.
+Verification checks runtime behavior, an isolated addon installation, editor
+integration and packaged playback. Passing `--cli` also checks real PLY/GLB
+preparation, cache reuse, cancellation, scene assignment and generated-asset
+exports. Logs and temporary projects stay under ignored `out/`. The supplied
+export preset includes the sample JSON manifests; the addon adds manifests from
+`gaussian_cake_generated/` automatically. Other library manifests need an export
+include filter. See
+[shipping your game](docs/GETTING_STARTED.md#ship-the-game).
